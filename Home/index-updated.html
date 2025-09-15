@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professzionális Betonút Aszfaltozási Szolgáltatások | ProPave Megoldások</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+        }
+
+        /* Typography Hierarchy */
+        h1 {
+            font-size: clamp(36px, 5vw, 48px);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: clamp(28px, 4vw, 32px);
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: #1e40af;
+        }
+
+        h3 {
+            font-size: clamp(20px, 3vw, 24px);
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            color: #4b5563;
+        }
+
+        /* Color System */
+        :root {
+            --primary-blue: #1e40af;
+            --secondary-blue: #3b82f6;
+            --accent-orange: #f97316;
+            --success-green: #059669;
+            --neutral-gray: #6b7280;
+            --light-gray: #f8fafc;
+            --dark-gray: #374151;
+        }
+
+        /* Layout Grid */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .grid {
+            display: grid;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        /* Navigation Menu - Sticky Top Navigation */
+        .nav-header {
+            background: white;
+            padding: 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-blue);
+        }
+
+        .nav-menu a.active {
+            color: var(--primary-blue);
+        }
+
+        .nav-menu a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent-orange);
+        }
+
+        .nav-cta {
+            background: var(--accent-orange);
+            color: white !important;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .nav-cta:hover {
+            background: #ea580c;
+            transform: translateY(-1px);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--dark-gray);
+            transition: all 0.3s ease;
+        }
+
+        /* Mobile Navigation */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                gap: 0;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+
+            .nav-menu.active {
+                max-height: 400px;
+                padding: 20px 0;
+            }
+
+            .nav-menu li {
+                width: 100%;
+                text-align: center;
+                padding: 12px 0;
+            }
+
+            .nav-menu a {
+                display: block;
+                padding: 12px 20px;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+        }
+
+        /* Block Spacing */
+        .block {
+            padding: 60px 0;
+        }
+
+        .block-alt {
+            background-color: var(--light-gray);
+        }
+
+        /* Hero Section - Split Layout Architecture */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            color: white;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-wrapper {
+            display: grid;
+            grid-template-columns: 60% 40%;
+            gap: 60px;
+            align-items: center;
+            text-align: left;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* SEO-Optimized Title Hierarchy */
+        .company-rating {
+            margin-bottom: 20px;
+        }
+
+        .company-name {
+            font-size: 28px;
+            font-weight: 600;
+            color: #fbbf24;
+            margin-bottom: 0;
+            text-align: left;
+        }
+
+        /* Header Contact Form - Simple and Clean */
+        .header-form-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            position: relative;
+            z-index: 2;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .form-header h3 {
+            color: var(--accent-orange);
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .header-form .form-group {
+            margin-bottom: 16px;
+        }
+
+        .header-form input,
+        .header-form textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+            color: #333;
+        }
+
+        .header-form input::placeholder,
+        .header-form textarea::placeholder {
+            color: #9ca3af;
+        }
+
+        .header-form input:focus,
+        .header-form textarea:focus {
+            outline: none;
+            border-color: var(--secondary-blue);
+        }
+
+        .header-form .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin: 16px 0;
+        }
+
+        .header-form .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin-top: 4px;
+        }
+
+        .header-form .checkbox-group label {
+            font-size: 12px;
+            color: #6b7280;
+            line-height: 1.4;
+        }
+
+        .header-form .submit-btn {
+            width: 100%;
+            background: var(--accent-orange);
+            color: white;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .header-form .submit-btn:hover {
+            background: #ea580c;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;
+            opacity: 0.3;
+        }
+
+        .hero h1 {
+            color: white;
+            margin-bottom: 24px;
+        }
+
+        .hero-subtitle {
+            font-size: 22px;
+            margin-bottom: 40px;
+            color: #e2e8f0;
+        }
+
+        .credibility-indicators {
+            display: flex;
+            justify-content: flex-start;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #fbbf24;
+        }
+
+        /* CTA Buttons */
+        .cta-primary {
+            background: var(--accent-orange);
+            color: white;
+            padding: 18px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .cta-primary:hover {
+            background: #ea580c;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(249, 115, 22, 0.3);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 16px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            margin-left: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .cta-secondary:hover {
+            background: white;
+            color: var(--primary-blue);
+        }
+
+        /* Content Blocks - Block-Based Content Architecture */
+        .content-block {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .content-block.reverse {
+            direction: rtl;
+        }
+
+        .content-block.reverse > * {
+            direction: ltr;
+        }
+
+        .block-image {
+            width: 100%;
+            height: 400px;
+            background: var(--light-gray);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: var(--neutral-gray);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .block-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, #e5e7eb 25%, transparent 25%), 
+                        linear-gradient(-45deg, #e5e7eb 25%, transparent 25%), 
+                        linear-gradient(45deg, transparent 75%, #e5e7eb 75%), 
+                        linear-gradient(-45deg, transparent 75%, #e5e7eb 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            opacity: 0.1;
+        }
+
+        /* Process Steps - Process Explanation Blocks */
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .step {
+            text-align: center;
+            padding: 40px 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--accent-orange);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0 auto 24px;
+        }
+
+        .step h3 {
+            color: var(--primary-blue);
+            margin-bottom: 16px;
+        }
+
+        /* Feature Cards - Benefit Showcase Blocks */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--secondary-blue);
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin: 0 auto 24px;
+        }
+
+        /* Social Proof - Social Proof Blocks */
+        .testimonial {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin: 30px 0;
+        }
+
+        .testimonial-quote {
+            font-size: 20px;
+            font-style: italic;
+            color: var(--dark-gray);
+            margin-bottom: 24px;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            background: var(--light-gray);
+            border-radius: 50%;
+        }
+
+        .author-info h4 {
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .author-info p {
+            font-size: 16px;
+            margin: 0;
+        }
+
+        /* Stats Section - Compact and Elegant */
+        .stats {
+            background: var(--primary-blue);
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        .stat-item h3 {
+            font-size: 40px;
+            font-weight: 700;
+            color: var(--accent-orange);
+            margin-bottom: 4px;
+        }
+
+        .stat-item p {
+            font-size: 16px;
+            color: #e2e8f0;
+            margin: 0;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark-gray);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary-blue);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .content-block {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .hero {
+                padding: 60px 0;
+            }
+
+            .hero-wrapper {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .header-form-card {
+                order: -1;
+                margin-bottom: 30px;
+            }
+
+            .credibility-indicators {
+                justify-content: center;
+                gap: 16px;
+            }
+
+            .cta-secondary {
+                margin-left: 0;
+                margin-top: 16px;
+            }
+
+            .block {
+                padding: 40px 0;
+            }
+
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations - Interactive Elements */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-gray);
+            color: white;
+            padding: 60px 0 30px;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+            text-align: left;
+        }
+
+        .footer h4 {
+            color: var(--accent-orange);
+            margin-bottom: 16px;
+        }
+
+        .footer p, .footer a {
+            color: #d1d5db;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .footer a:hover {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Menu -->
+    <header class="nav-header">
+        <nav class="nav-container">
+            <a href="#" class="logo">ProPave Megoldások</a>
+            
+            <ul class="nav-menu">
+                <li><a href="#" class="active">Főoldal</a></li>
+                <li><a href="#szolgaltatasok">Szolgáltatások</a></li>
+                <li><a href="#folyamat">Folyamat</a></li>
+                <li><a href="#referenciak">Referenciák</a></li>
+                <li><a href="#arak">Árak</a></li>
+                <li><a href="#kapcsolat" class="nav-cta">Ajánlatkérés</a></li>
+            </ul>
+            
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-wrapper">
+                <div class="hero-content">
+                    <!-- Cégnév és csillagok felül -->
+                    <div class="company-rating">
+                        <h2 class="company-name">ProPave Megoldások ★★★★★</h2>
+                    </div>
+                    
+                    <!-- SEO-optimalizált főcím -->
+                    <h1>5-Csillagos Betonút Aszfaltozó Szakértők Budapesten és Pest Megyében!</h1>
+                    
+                    <!-- SEO-optimalizált alcím -->
+                    <p class="hero-subtitle">Üdvözöljük a ProPave Megoldásoknál, az Ön megbízható partnere kivételes betonút aszfaltozási szolgáltatásokban Budapesten. Emelje fel ingatlanja értékét prémium aszfaltozási megoldásainkkal, amelyek tökéletesen ötvözik a stílust és a funkcionalitást. Tapasztalt szakértőként büszkék vagyunk páratlan kézművességünkre és személyre szabott szolgáltatásunkra.</p>
+                    
+                    <div class="credibility-indicators">
+                        <div class="indicator">
+                            <span>🏆</span>
+                            <span>BBB A+ minősítés</span>
+                        </div>
+                        <div class="indicator">
+                            <span>🛡️</span>
+                            <span>Engedélyezett és biztosított</span>
+                        </div>
+                        <div class="indicator">
+                            <span>⚡</span>
+                            <span>25+ év tapasztalat</span>
+                        </div>
+                    </div>
+
+                    <a href="#contact" class="cta-primary">Ingyenes árajánlat</a>
+                    <a href="#folyamat" class="cta-secondary">Folyamat megtekintése</a>
+                </div>
+                
+                <!-- Header Contact Form - Clean Version -->
+                <div class="header-form-card">
+                    <div class="form-header">
+                        <h3>INGYENES FELMÉRÉS</h3>
+                    </div>
+                    
+                    <form class="header-form">
+                        <div class="form-group">
+                            <input type="text" name="name" placeholder="Teljes név" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" placeholder="Email cím" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" name="phone" placeholder="Telefonszám" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="zipcode" placeholder="Irányítószám" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="details" rows="3" placeholder="Projekt részletek (opcionális)"></textarea>
+                        </div>
+                        
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="consent" name="consent" required>
+                            <label for="consent">A beküldéssel engedélyezi, hogy a ProPave Megoldások telefonon, emailen vagy SMS-ben felvegye Önnel a kapcsolatot betonút aszfaltozási árajánlat érdekében.</label>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Ingyenes árajánlat kérése</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem/Solution Block -->
+    <section class="block" id="szolgaltatasok">
+        <div class="container">
+            <div class="content-block">
+                <div>
+                    <h2>Elege van a repedt, kopott betonútjából?</h2>
+                    <p>A betonút az első, amit a látogatók meglátnak. Ne hagyja, hogy a repedések, kátyúk és a kopott aszfalt rontsa otthona vonzerejét és értékét.</p>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin: 12px 0; display: flex; align-items: center; gap: 12px;">
+                            <span style="color: var(--success-green); font-size: 20px;">✓</span>
+                            <span>Veszélyes botlásveszélyek kiküszöbölése</span>
+                        </li>
+                        <li style="margin: 12px 0; display: flex; align-items: center; gap: 12px;">
+                            <span style="color: var(--success-green); font-size: 20px;">✓</span>
+                            <span>Ingatlan értékének növelése akár 4 millió forinttal</span>
+                        </li>
+                        <li style="margin: 12px 0; display: flex; align-items: center; gap: 12px;">
+                            <span style="color: var(--success-green); font-size: 20px;">✓</span>
+                            <span>Lenyűgöző külső megjelenés létrehozása</span>
+                        </li>
+                        <li style="margin: 12px 0; display: flex; align-items: center; gap: 12px;">
+                            <span style="color: var(--success-green); font-size: 20px;">✓</span>
+                            <span>Több millió forint megtakarítása jövőbeli javításokon</span>
+                        </li>
+                    </ul>
+                    <a href="#contact" class="cta-primary">Projekt indítása</a>
+                </div>
+                <div class="block-image">
+                    <div style="text-align: center; color: var(--neutral-gray);">
+                        <div style="font-size: 64px; margin-bottom: 16px;">🏠</div>
+                        <p>Előtte: Repedt és károsodott betonút</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Steps Block -->
+    <section class="block block-alt" id="folyamat">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 60px;">
+                <h2>Bizonyított 6-lépéses Folyamatunk</h2>
+                <p style="font-size: 20px; max-width: 600px; margin: 0 auto;">A kezdeti konzultációtól a végleges takarításig, precizitással és gondoskodással kezeljük betonút átalakításának minden részletét.</p>
+            </div>
+
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Ingyenes Konzultáció</h3>
+                    <p>Szakértőink felmérik betonútját, megbeszéljük szükségleteit, és részletes árajánlatot adunk rejtett költségek nélkül.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Helyszín Előkészítése</h3>
+                    <p>Megvédjük a kertészeti munkákat, megjelöljük a közműveket és előkészítjük a területet az optimális aszfaltozási körülményekhez.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Földmunka és Szintezés</h3>
+                    <p>Eltávolítjuk a régi anyagokat, megfelelő vízelveze tést alakítunk ki és stabil alapot hozunk létre precíziós lézer szintezéssel.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Alapréteg Kialakítása</h3>
+                    <p>Zúzalékos alapanyag beépítése és tömörítése a hosszú távú stabilitás biztosítása és jövőbeli süllyedés megakadályozása érdekében.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <h3>Aszfalt Felhordása</h3>
+                    <p>Forró keverékű aszfalt felhordása kereskedelmi minőségű berendezésekkel sima, tartós felület létrehozásához, amely évtizedekig tart.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">6</div>
+                    <h3>Végső Ellenőrzés</h3>
+                    <p>Teljes minőségellenőrzés, takarítás és karbantartási útmutató nyújtása befektetésének védelme érdekében.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Block -->
+    <section class="block">
+        <div class="container">
+            <div class="content-block reverse">
+                <div class="block-image">
+                    <div style="text-align: center; color: var(--neutral-gray);">
+                        <div style="font-size: 64px; margin-bottom: 16px;">🚛</div>
+                        <p>Kereskedelmi Minőségű Aszfaltozó Berendezések</p>
+                    </div>
+                </div>
+                <div>
+                    <h2>Legkorúzzerűbb Berendezések és Anyagok</h2>
+                    <p>A legfrissebb technológiákba fektetünk be, hogy kiváló eredményeket nyújt unk, amelyek kibirja az idő próbáját.</p>
+                    
+                    <h3>Prémium Forró Keverékű Aszfalt</h3>
+                    <p>Tanúsítványozott aszfalt keverékünk polimer-módosított kötőanyagokat tartalmaz a megnövékenr rugalmasság és repedésállóság érdekében, 40%-kal hosszabb élettartamot biztosítva a standard keverékekhez képest.</p>
+                    
+                    <h3>Lézer-Irányított Szintezés</h3>
+                    <p>GPS és lézer technológia biztosítja a tökéletes vízelvezető lejtéseket és kiküszöböli az állóvíz problémákat, amelyek korai romlást okoznak.</p>
+                    
+                    <h3>Kereskedelmi Tömörítés</h3>
+                    <p>Nagy teljesítményű hengerek 95%-os vagy magasabb tömörítési sűrűséget érnek el, erős alapot létrehozva a nehezenjármű forgalomhoz.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section class="block block-alt">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 60px;">
+                <h2>Miért Válassza a ProPave Megoldásokat?</h2>
+                <p style="font-size: 20px;">Három évtized tapasztalat kivételes eredmények nyújtásában ezernyi betonút esetében.</p>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Élettartam Garancia</h3>
+                    <p>Kitártunk munkánk mellett átfogó garanciavállalással az anyagokra és a kivételezésre.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Rejtett Költségek Nélkül</h3>
+                    <p>Átlátható árazás részletes írásos árajánlattal. Amit árajánlatunk tartalmaz, azt fizeti – garantaltan.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Gyors Kivételezés</h3>
+                    <p>A legtöbb betonút 1-2 nap alatt elkészül, minimális zavarással napi rutinjában.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌟</div>
+                    <h3>Engedélyezett és Biztosított</h3>
+                    <p>Teljes engedélyezés, káukési biztosítás és 600 millió Ft felelősségbiztosítás védi ingatlanját és befektetését.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📞</div>
+                    <h3>24/7 Sürgősségi Szolgáltatás</h3>
+                    <p>Vihar kár? Azonnali sürgősségi javítási szolgáltatást nyújtunk ingatlanja azonnali védelmére.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Precíz Eredmények</h3>
+                    <p>Lézer-irányított kivételezés biztosítja a tökéletes vízelveze tést és kiküszöböli a jövőbeli vízáltal okozta károkat.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof/Testimonials -->
+    <section class="block">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 60px;">Mit Mondanak Ügyfeleink</h2>
+            
+            <div class="grid grid-2">
+                <div class="testimonial">
+                    <div class="testimonial-quote">
+                        "Teljesen kiváló munka! Az új betonútunk hihetetlenül néz ki, és a csapat az egész folyamat során professzionális volt. Minden fillért megért."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar"></div>
+                        <div class="author-info">
+                            <h4>Molnár Éva</h4>
+                            <p>Ingatlantulajdonos, Budakeszi</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial">
+                    <div class="testimonial-quote">
+                        "A nagy betonútunkat mindössze két nap alatt fejezték be. Kiváló kommunikáció, fair árazás és a minőség túlléjgme elvárásainkat."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar"></div>
+                        <div class="author-info">
+                            <h4>Kovács Róbert</h4>
+                            <p>Ingatlantulajdonos, Szentendre</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section - Compact Version -->
+    <section class="stats">
+        <div class="container">
+            <h2>Megbízható Partner</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>5,200+</h3>
+                    <p>Befejezett Betonút</p>
+                </div>
+                <div class="stat-item">
+                    <h3>25+</h3>
+                    <p>Év Tapasztalat</p>
+                </div>
+                <div class="stat-item">
+                    <h3>4.9★</h3>
+                    <p>Átlag Értékelés</p>
+                </div>
+                <div class="stat-item">
+                    <h3>100%</h3>
+                    <p>Elégedettség</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact/Conversion Block -->
+    <section class="block" id="contact">
+        <div class="container">
+            <div class="content-block">
+                <div>
+                    <h2>Készen Áll Betonútja Átalakítására?</h2>
+                    <p style="font-size: 20px; margin-bottom: 30px;">Szerezze be ingyenes, kötelezettségvállalás nélküli árajánlatát még ma. Szakértőink felmérik betonútját és részletes árazást nyújtanak rejtett költségek nélkül.</p>
+                    
+                    <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
+                        <span style="color: var(--success-green); font-size: 24px;">✓</span>
+                        <span>Ingyenes árajánlat 24 órán belül</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
+                        <span style="color: var(--success-green); font-size: 24px;">✓</span>
+                        <span>Nyomás nélküli értékesítési megközelítés</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 30px;">
+                        <span style="color: var(--success-green); font-size: 24px;">✓</span>
+                        <span>Rugalmas ütemezés az Ön időbeosztásához</span>
+                    </div>
+
+                    <div style="background: var(--primary-blue); color: white; padding: 20px; border-radius: 8px; text-align: center;">
+                        <h3 style="color: white; margin-bottom: 8px;">Hívjon Most Azonnali Szolgáltatásért</h3>
+                        <a href="tel:+36-1-555-7283" style="color: var(--accent-orange); font-size: 28px; font-weight: 700; text-decoration: none;">+36 1 555 PAVE</a>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <h3>Ingyenes Árajánlat Kérése</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Teljes Név *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Telefonszám *</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Cím</label>
+                            <input type="email" id="email" name="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Ingatlan Címe *</label>
+                            <input type="text" id="address" name="address" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="project">Projekt Részletei</label>
+                            <textarea id="project" name="project" rows="4" placeholder="Írja le betonút projektjét, méretét és minden speciális igényét..."></textarea>
+                        </div>
+                        <button type="submit" class="cta-primary" style="width: 100%;">Ingyenes Árajánlat Kérése</button>
+                    </form>
+                    <p style="font-size: 14px; text-align: center; margin-top: 16px; color: var(--neutral-gray);">
+                        Információi biztonságban vannak és soha nem adjuk tovább harmadik feleknek.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h4>ProPave Megoldások</h4>
+                    <p>Professzionális betonút aszfaltozási szolgáltatások 25+ év tapasztalattal, ingatlantulajdonosokat szolgálva az egész régióban.</p>
+                    <p><strong>Engedély száma: ASZ-2024-001</strong></p>
+                </div>
+                <div>
+                    <h4>Szolgáltatások</h4>
+                    <p><a href="#">Betonút Aszfaltozás</a></p>
+                    <p><a href="#">Betonút Javítás</a></p>
+                    <p><a href="#">Szigetelőbevonat</a></p>
+                    <p><a href="#">Sürgősségi Javítások</a></p>
+                </div>
+                <div>
+                    <h4>Kapcsolat</h4>
+                    <p>📞 +36 1 555 PAVE</p>
+                    <p>📧 info@propavemegoldasok.hu</p>
+                    <p>📍 Aszfalt utca 123<br>Budapest, 1011</p>
+                    <p>🕒 Hétfő-Péntek: 7:00-18:00<br>Szombat: 8:00-16:00</p>
+                </div>
+            </div>
+            <div style="text-align: center; padding-top: 30px; border-top: 1px solid #4b5563; color: #9ca3af;">
+                <p>&copy; 2024 ProPave Megoldások. Minden jog fenntartva. | Engedélyezett és Biztosított | BBB A+ Minősítés</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        mobileMenuToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+        });
+
+        // Simple form handling
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Köszönjük érdeklődését! 24 órán belül felvesszük Önnel a kapcsolatot ingyenes árajánlattal.');
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+                // Close mobile menu after clicking a link
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Add scroll animation to elements
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-up');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.step, .feature-card, .testimonial').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
