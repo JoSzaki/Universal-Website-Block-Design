@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budapest Kerületek Térképe</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: #d73027;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        
+        .header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+        }
+        
+        #map {
+            height: 600px;
+            width: 100%;
+            background: #e0e0e0;
+        }
+        
+        .info {
+            padding: 20px;
+            background: #f8f9fa;
+            text-align: center;
+        }
+        
+        .districts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .district-item {
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            border: 2px solid #ddd;
+            transition: border-color 0.3s;
+        }
+        
+        .district-item:hover {
+            border-color: #d73027;
+        }
+        
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 600px;
+            font-size: 18px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏛️ Budapest Kerületek Térképe</h1>
+            <p>Mind a 23 kerület központja jelölve</p>
+        </div>
+        
+        <div id="map">
+            <div class="loading">📍 Térkép betöltése...</div>
+        </div>
+        
+        <div class="info">
+            <h3>Budapest 23 kerülete</h3>
+            <div class="districts-grid" id="districtsGrid">
+                <!-- JavaScript tölti fel -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Budapest kerületeinek adatai (név, koordináták)
+        const budapestDistricts = [
+            { district: "I.", name: "Budavári", lat: 47.4969, lng: 19.0395 },
+            { district: "II.", name: "Rózsadomb", lat: 47.5167, lng: 19.0258 },
+            { district: "III.", name: "Óbuda-Békásmegyer", lat: 47.5406, lng: 19.0531 },
+            { district: "IV.", name: "Újpest", lat: 47.5616, lng: 19.0884 },
+            { district: "V.", name: "Belváros-Lipótváros", lat: 47.4983, lng: 19.0514 },
+            { district: "VI.", name: "Terézváros", lat: 47.5057, lng: 19.0658 },
+            { district: "VII.", name: "Erzsébetváros", lat: 47.4979, lng: 19.0708 },
+            { district: "VIII.", name: "Józsefváros", lat: 47.4867, lng: 19.0700 },
+            { district: "IX.", name: "Ferencváros", lat: 47.4767, lng: 19.0814 },
+            { district: "X.", name: "Kőbánya", lat: 47.4758, lng: 19.1447 },
+            { district: "XI.", name: "Újbuda", lat: 47.4736, lng: 19.0394 },
+            { district: "XII.", name: "Hegyvidék", lat: 47.5089, lng: 18.9897 },
+            { district: "XIII.", name: "Angyalföld", lat: 47.5306, lng: 19.0706 },
+            { district: "XIV.", name: "Zugló", lat: 47.5175, lng: 19.1036 },
+            { district: "XV.", name: "Rákospalota", lat: 47.5708, lng: 19.1192 },
+            { district: "XVI.", name: "Mátyásföld", lat: 47.5133, lng: 19.1533 },
+            { district: "XVII.", name: "Rákosmente", lat: 47.4817, lng: 19.2558 },
+            { district: "XVIII.", name: "Pestszentlőrinc", lat: 47.4356, lng: 19.1756 },
+            { district: "XIX.", name: "Kispest", lat: 47.4472, lng: 19.1394 },
+            { district: "XX.", name: "Pesterzsébet", lat: 47.4422, lng: 19.1072 },
+            { district: "XXI.", name: "Csepel", lat: 47.4244, lng: 19.0775 },
+            { district: "XXII.", name: "Budafok-Tétény", lat: 47.4294, lng: 19.0333 },
+            { district: "XXIII.", name: "Soroksár", lat: 47.4081, lng: 19.1447 }
+        ];
+
+        let map;
+        let markers = [];
+
+        // Térkép inicializálása
+        function initMap() {
+            // Budapest központ
+            const budapest = { lat: 47.4979, lng: 19.0402 };
+
+            map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 11,
+                center: budapest,
+                mapTypeId: 'roadmap',
+                styles: [
+                    {
+                        "featureType": "administrative.country",
+                        "elementType": "geometry.stroke",
+                        "stylers": [{"color": "#d73027"}]
+                    }
+                ]
+            });
+
+            // Összes kerület jelölőjének hozzáadása
+            budapestDistricts.forEach((district, index) => {
+                setTimeout(() => {
+                    addDistrictMarker(district, index);
+                }, index * 100); // Animált megjelenés
+            });
+
+            // Kerületek listájának feltöltése
+            populateDistrictsList();
+        }
+
+        // Kerület jelölő hozzáadása
+        function addDistrictMarker(district, index) {
+            const marker = new google.maps.Marker({
+                position: { lat: district.lat, lng: district.lng },
+                map: map,
+                title: `${district.district} ${district.name}`,
+                animation: google.maps.Animation.DROP,
+                label: {
+                    text: district.district,
+                    color: 'white',
+                    fontWeight: 'bold',
+                    fontSize: '12px'
+                },
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    fillColor: '#d73027',
+                    fillOpacity: 0.8,
+                    strokeColor: 'white',
+                    strokeWeight: 2,
+                    scale: 15
+                }
+            });
+
+            // Info ablak létrehozása
+            const infoWindow = new google.maps.InfoWindow({
+                content: `
+                    <div style="padding: 10px; text-align: center;">
+                        <h4 style="margin: 0 0 5px 0; color: #d73027;">
+                            ${district.district} kerület
+                        </h4>
+                        <p style="margin: 0 0 5px 0; font-weight: bold;">
+                            ${district.name}
+                        </p>
+                        <small style="color: #666;">
+                            ${district.lat.toFixed(4)}, ${district.lng.toFixed(4)}
+                        </small>
+                    </div>
+                `
+            });
+
+            // Kattintás esemény
+            marker.addListener('click', () => {
+                // Összes más info ablak bezárása
+                markers.forEach(m => m.infoWindow.close());
+                
+                infoWindow.open(map, marker);
+                
+                // Kerület kiemelése a listában
+                highlightDistrict(index);
+            });
+
+            // Marker és info ablak tárolása
+            marker.infoWindow = infoWindow;
+            markers.push(marker);
+        }
+
+        // Kerületek listájának feltöltése
+        function populateDistrictsList() {
+            const grid = document.getElementById('districtsGrid');
+            
+            budapestDistricts.forEach((district, index) => {
+                const item = document.createElement('div');
+                item.className = 'district-item';
+                item.innerHTML = `
+                    <strong>${district.district}</strong><br>
+                    <small>${district.name}</small>
+                `;
+                
+                // Kattintásra a térképen a megfelelő jelölőre ugrik
+                item.addEventListener('click', () => {
+                    map.setCenter({ lat: district.lat, lng: district.lng });
+                    map.setZoom(14);
+                    
+                    // Info ablak megnyitása
+                    markers.forEach(m => m.infoWindow.close());
+                    markers[index].infoWindow.open(map, markers[index]);
+                    
+                    highlightDistrict(index);
+                });
+                
+                grid.appendChild(item);
+            });
+        }
+
+        // Kerület kiemelése a listában
+        function highlightDistrict(index) {
+            const items = document.querySelectorAll('.district-item');
+            items.forEach(item => item.style.borderColor = '#ddd');
+            items[index].style.borderColor = '#d73027';
+        }
+
+        // Alternatív megoldás API kulcs nélkül - OpenStreetMap használata
+        function initMapWithoutAPI() {
+            const mapDiv = document.getElementById('map');
+            mapDiv.innerHTML = `
+                <iframe 
+                    width="100%" 
+                    height="600" 
+                    style="border:0" 
+                    src="https://www.openstreetmap.org/export/embed.html?bbox=18.9,47.35,19.3,47.65&layer=mapnik&marker=47.4979,19.0402"
+                    allowfullscreen>
+                </iframe>
+                <div style="position: absolute; top: 10px; left: 10px; background: rgba(255,255,255,0.9); padding: 10px; border-radius: 5px;">
+                    <strong>Budapest térképe</strong><br>
+                    <small>OpenStreetMap alapú nézet</small>
+                </div>
+            `;
+        }
+
+        // Térkép inicializálása
+        window.initMap = initMap;
+
+        // Ha 5 másodperc után sem töltődött be a Google Maps, akkor alternatív megoldást használunk
+        setTimeout(() => {
+            if (typeof google === 'undefined') {
+                console.log('Google Maps API nem elérhető, OpenStreetMap használata...');
+                initMapWithoutAPI();
+            }
+        }, 5000);
+    </script>
+
+    <!-- Google Maps JavaScript API (ingyenes API kulcs szükséges a teljes funkcionalitáshoz) -->
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap">
+    </script>
+</body>
+</html>

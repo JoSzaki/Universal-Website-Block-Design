@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Maps Példa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: #4285f4;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .controls {
+            padding: 20px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .control-group {
+            margin-bottom: 15px;
+        }
+        
+        .control-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .control-group input, .control-group select {
+            width: 100%;
+            max-width: 300px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        .control-group button {
+            background: #4285f4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-right: 10px;
+            margin-top: 10px;
+        }
+        
+        .control-group button:hover {
+            background: #3367d6;
+        }
+        
+        #map {
+            height: 500px;
+            width: 100%;
+        }
+        
+        .info-panel {
+            padding: 20px;
+            background: white;
+        }
+        
+        .location-info {
+            background: #e8f0fe;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .controls {
+                padding: 15px;
+            }
+            
+            .control-group input, .control-group select {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🗺️ Google Maps Példa</h1>
+            <p>Interaktív térkép helyszínek megjelenítésével</p>
+        </div>
+        
+        <div class="controls">
+            <div class="control-group">
+                <label for="searchInput">Keresés helyszínre:</label>
+                <input type="text" id="searchInput" placeholder="Pl. Budapest, Parlament" />
+                <button onclick="searchLocation()">Keresés</button>
+            </div>
+            
+            <div class="control-group">
+                <label for="mapType">Térkép típusa:</label>
+                <select id="mapType" onchange="changeMapType()">
+                    <option value="roadmap">Közúti</option>
+                    <option value="satellite">Műholdas</option>
+                    <option value="hybrid">Hibrid</option>
+                    <option value="terrain">Domborzati</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <button onclick="addMarker()">Jelölő hozzáadása</button>
+                <button onclick="clearMarkers()">Jelölők törlése</button>
+                <button onclick="getCurrentLocation()">Saját helyszín</button>
+            </div>
+        </div>
+        
+        <div id="map"></div>
+        
+        <div class="info-panel">
+            <h3>Használat:</h3>
+            <ul>
+                <li>Kattints a térképre új jelölő hozzáadásához</li>
+                <li>Használd a keresőt konkrét helyszínek megtalálásához</li>
+                <li>Változtasd a térkép típusát a legördülő menüből</li>
+                <li>A "Saját helyszín" gomb megmutatja az aktuális pozíciódat</li>
+            </ul>
+            
+            <div id="locationInfo" class="location-info">
+                <h4>Kiválasztott helyszín:</h4>
+                <p id="locationDetails"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let map;
+        let markers = [];
+        let geocoder;
+        let infoWindow;
+
+        // Térkép inicializálása
+        function initMap() {
+            // Budapest központ
+            const budapest = { lat: 47.4979, lng: 19.0402 };
+
+            map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 12,
+                center: budapest,
+                mapTypeId: 'roadmap'
+            });
+
+            geocoder = new google.maps.Geocoder();
+            infoWindow = new google.maps.InfoWindow();
+
+            // Kattintás esemény a térképen
+            map.addListener("click", (event) => {
+                addMarkerAtLocation(event.latLng);
+            });
+
+            // Kezdő jelölők hozzáadása
+            addDefaultMarkers();
+        }
+
+        // Alapértelmezett jelölők
+        function addDefaultMarkers() {
+            const locations = [
+                { lat: 47.5017, lng: 19.0458, title: "Parlament", info: "Magyar Országgyűlés épülete" },
+                { lat: 47.4969, lng: 19.0603, title: "Széchenyi fürdő", info: "Híres gyógyfürdő" },
+                { lat: 47.4974, lng: 19.0404, title: "Váci utca", info: "Fő bevásárló utca" }
+            ];
+
+            locations.forEach(location => {
+                const marker = new google.maps.Marker({
+                    position: { lat: location.lat, lng: location.lng },
+                    map: map,
+                    title: location.title,
+                    animation: google.maps.Animation.DROP
+                });
+
+                const infoWindowContent = `
+                    <div>
+                        <h4>${location.title}</h4>
+                        <p>${location.info}</p>
+                        <p><small>Lat: ${location.lat.toFixed(4)}, Lng: ${location.lng.toFixed(4)}</small></p>
+                    </div>
+                `;
+
+                marker.addListener("click", () => {
+                    infoWindow.setContent(infoWindowContent);
+                    infoWindow.open(map, marker);
+                    showLocationInfo(location.title, location.info, location.lat, location.lng);
+                });
+
+                markers.push(marker);
+            });
+        }
+
+        // Jelölő hozzáadása adott helyszínen
+        function addMarkerAtLocation(location) {
+            const marker = new google.maps.Marker({
+                position: location,
+                map: map,
+                title: "Új jelölő",
+                animation: google.maps.Animation.BOUNCE
+            });
+
+            // Animáció leállítása 2 másodperc után
+            setTimeout(() => {
+                marker.setAnimation(null);
+            }, 2000);
+
+            // Reverse geocoding - koordinátákból címet csinál
+            geocoder.geocode({ location: location }, (results, status) => {
+                if (status === "OK" && results[0]) {
+                    const address = results[0].formatted_address;
+                    
+                    const infoWindowContent = `
+                        <div>
+                            <h4>Új helyszín</h4>
+                            <p>${address}</p>
+                            <p><small>Lat: ${location.lat().toFixed(4)}, Lng: ${location.lng().toFixed(4)}</small></p>
+                        </div>
+                    `;
+
+                    marker.addListener("click", () => {
+                        infoWindow.setContent(infoWindowContent);
+                        infoWindow.open(map, marker);
+                        showLocationInfo("Új helyszín", address, location.lat(), location.lng());
+                    });
+                }
+            });
+
+            markers.push(marker);
+        }
+
+        // Helyszín keresése
+        function searchLocation() {
+            const address = document.getElementById('searchInput').value;
+            
+            if (!address) {
+                alert('Kérlek adj meg egy keresendő helyszínt!');
+                return;
+            }
+
+            geocoder.geocode({ address: address }, (results, status) => {
+                if (status === "OK") {
+                    const location = results[0].geometry.location;
+                    map.setCenter(location);
+                    map.setZoom(15);
+
+                    // Jelölő hozzáadása a keresett helyszínen
+                    addMarkerAtLocation(location);
+                } else {
+                    alert('A helyszín nem található: ' + status);
+                }
+            });
+        }
+
+        // Térkép típusának változtatása
+        function changeMapType() {
+            const mapType = document.getElementById('mapType').value;
+            map.setMapTypeId(mapType);
+        }
+
+        // Jelölő hozzáadása aktuális pozícióhoz
+        function addMarker() {
+            const center = map.getCenter();
+            addMarkerAtLocation(center);
+        }
+
+        // Összes jelölő törlése
+        function clearMarkers() {
+            markers.forEach(marker => {
+                marker.setMap(null);
+            });
+            markers = [];
+            document.getElementById('locationInfo').style.display = 'none';
+        }
+
+        // Aktuális helyszín megjelenítése
+        function getCurrentLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const pos = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude,
+                        };
+
+                        map.setCenter(pos);
+                        map.setZoom(15);
+                        addMarkerAtLocation(pos);
+
+                        infoWindow.setPosition(pos);
+                        infoWindow.setContent("Aktuális helyszíned");
+                        infoWindow.open(map);
+                    },
+                    () => {
+                        alert('Nem sikerült meghatározni a helyszínedet.');
+                    }
+                );
+            } else {
+                alert('A böngésződ nem támogatja a geolokációt.');
+            }
+        }
+
+        // Helyszín információk megjelenítése
+        function showLocationInfo(title, info, lat, lng) {
+            const locationInfo = document.getElementById('locationInfo');
+            const locationDetails = document.getElementById('locationDetails');
+            
+            locationDetails.innerHTML = `
+                <strong>${title}</strong><br>
+                ${info}<br>
+                <small>Koordináták: ${lat.toFixed(4)}, ${lng.toFixed(4)}</small>
+            `;
+            
+            locationInfo.style.display = 'block';
+        }
+
+        // Enter billentyű kezelése a keresőben
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchLocation();
+            }
+        });
+
+        // Térkép inicializálása az oldal betöltésekor
+        window.initMap = initMap;
+    </script>
+
+    <!-- Google Maps JavaScript API -->
+    <!-- FONTOS: Cseréld le a YOUR_API_KEY részt a saját Google Maps API kulcsodra! -->
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap&libraries=places">
+    </script>
+
+    <script>
+        // Ha nincs API kulcs, akkor egy figyelmeztetést mutatunk
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                if (typeof google === 'undefined') {
+                    document.getElementById('map').innerHTML = `
+                        <div style="display: flex; align-items: center; justify-content: center; height: 100%; background: #f0f0f0; color: #666; text-align: center; flex-direction: column;">
+                            <h3>⚠️ Google Maps API kulcs szükséges</h3>
+                            <p>A térkép működéséhez Google Maps API kulcsot kell beszereznod:</p>
+                            <ol style="text-align: left; display: inline-block;">
+                                <li>Menj a <a href="https://console.cloud.google.com/" target="_blank">Google Cloud Console</a>-ra</li>
+                                <li>Hozz létre egy új projektet vagy válassz egy meglévőt</li>
+                                <li>Engedélyezd a Maps JavaScript API-t</li>
+                                <li>Hozz létre egy API kulcsot</li>
+                                <li>Cseréld le a HTML-ben a YOUR_API_KEY részt</li>
+                            </ol>
+                            <p><small>Demo célokra ingyenesen használható!</small></p>
+                        </div>
+                    `;
+                }
+            }, 3000);
+        });
+    </script>
+</body>
+</html>

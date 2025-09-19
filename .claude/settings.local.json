@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/sznor/**)",
+      "Bash(ls:*)",
+      "Bash(claude mcp add playwright --scope user -- npx -y playwright-mcp-server:*)",
+      "Bash(claude mcp add:*)",
+      "Bash(claude mcp remove:*)",
+      "Bash(echo $SHELL)",
+      "Bash(claude mcp:*)",
+      "WebFetch(domain:www.nypavers.com)",
+      "Bash(npm install:*)",
+      "mcp__magic__21st_magic_component_builder",
+      "Bash(echo $HOME)",
+      "Read(//c/c/Users/sznor/**)",
+      "mcp__firecrawl__firecrawl_scrape",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_click",
+      "mcp__playwright__browser_snapshot",
+      "mcp__playwright__browser_close",
+      "Bash(python:*)"
+    ],
+    "deny": [],
+    "ask": []
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "magic"
+  ]
+}
