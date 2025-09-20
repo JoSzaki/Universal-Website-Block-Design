@@ -165,12 +165,13 @@ Minden szakipari tevékenység **5 fő fázisra** bontható:
 - **Konkrét számok:** "25+ év", "300+ projekt"
 - **Probléma + megoldás** párok
 - **Tisztaság hangsúlyozás**
+- **Természetes csapat hivatkozások:** "cégünk", "csapatunk" (ahol logikus)
 
 ### **❌ KERÜLD:**
-- "Cégünk", "csapatunk" (kivéve ahol indokolt)
 - Túl technikai szakzsargon
 - Általános marketing frázisok
 - Ígéretek konkrét számok nélkül
+- Mesterkélt, túl személytelen megfogalmazásokat
 
 ---
 
@@ -501,7 +502,7 @@ HTML Template:
 
 ## 🧠 **UltraThink Service Research Methodology**
 
-### **🔬 8-Phase Service Research Framework**
+### **🔬 6-Phase Service Research Framework**
 
 **KRITIKUS:** Minden szolgáltatás link és tartalom fejlesztése előtt kötelező végrehajtani ezt a kutatási metodológiát. Semmiféle szolgáltatás oldalra mutató link nem kerülhet be guesswork alapján!
 
@@ -531,12 +532,10 @@ HTML Template:
 
 #### **Phase 3: 🏢 Real Business Investigation**
 ```
-□ Local business direct contact (mystery shopping)
 □ Chamber of commerce member listings
 □ Better Business Bureau profiles
 □ Trade license public records
 □ Insurance company service categories
-□ Supplier/distributor partner networks
 □ Equipment rental company cross-references
 □ Professional association member directories
 ```
@@ -568,72 +567,132 @@ HTML Template:
 #### **Phase 6: ✅ Validation Matrix Creation**
 ```
 □ Service feasibility assessment (equipment/skill required)
-□ Market demand quantification (search volume)
-□ Competition density analysis (supply/demand ratio)
-□ Profit margin evaluation (cost vs pricing)
+□ Market demand quantification (DataForSEO search volume API)
+□ Competition density analysis (SERP analysis + supply/demand ratio)
+□ Profit margin evaluation (CPC data + cost vs pricing)
 □ Certification/license requirements check
 □ Insurance coverage necessities
 □ Equipment investment needed
 □ Skill development timeline
+□ Seasonal demand patterns analysis (DataForSEO trends)
+□ Local vs national search interest comparison
+□ Related keywords opportunity mapping
 ```
 
-#### **Phase 7: 📈 Strategic Service Prioritization**
-```
-□ High-demand, low-competition identification
-□ Cross-selling opportunity mapping
-□ Seasonal optimization planning
-□ Geographic expansion possibilities
-□ Partnership/subcontracting options
-□ Training/certification roadmap
-□ Equipment acquisition timeline
-□ Marketing budget allocation per service
-```
 
-#### **Phase 8: 🎯 Implementation Roadmap**
-```
-□ Phase 1 services (immediate implementation)
-□ Phase 2 services (6-month development)
-□ Phase 3 services (12-month expansion)
-□ Required certifications timeline
-□ Equipment purchase schedule
-□ Staff training program
-□ Marketing campaign development
-□ Website content creation priority
-```
 
 ### **📋 Pre-Development Todo Checklist**
 
 **MINDEN szolgáltatás oldal fejlesztése előtt kötelező:**
 
 ```
-□ UltraThink 8-Phase Research befejezése
+□ UltraThink 6-Phase Research befejezése
+□ DataForSEO MCP telepítése és API kulcs konfiguráció
 □ Service Taxonomy dokumentálása (data/services.json)
-□ Validation Matrix elkészítése (spreadsheet/database)
-□ Strategic Prioritization rangorolása
-□ Implementation Roadmap jóváhagyása
+□ Validation Matrix elkészítése (DataForSEO adatokkal)
 □ Actual service offerings final list (NO GUESSING!)
-□ Cross-link opportunities mapping
+□ Cross-link opportunities mapping (related keywords alapján)
 □ Content creation briefing
 ```
 
 ### **🚨 Quality Control Gates**
 
+#### **Gate 0: DataForSEO MCP Access**
+```
+❌ BLOKKOLVA: Ha nincs DataForSEO MCP kapcsolat
+✅ ENGEDÉLYEZETT: DataForSEO MCP status ✓ Connected
+→ Automatikus telepítés: claude mcp add --header "Authorization: Basic bm9yYmlAam9zemFraS5odTo1MTljZjNiOTAwZjhmYWUw" --transport http dfs-mcp https://mcp.dataforseo.com/http
+```
+
 #### **Gate 1: Research Completeness**
 ```
 ❌ BLOKKOLVA: Ha bármelyik research phase < 100%
-✅ ENGEDÉLYEZETT: Mind a 8 phase dokumentálva
+✅ ENGEDÉLYEZETT: Mind a 6 phase dokumentálva + DataForSEO validation
 ```
 
 #### **Gate 2: Service Validation**
 ```
-❌ BLOKKOLVA: Ha nincs real business validation
-✅ ENGEDÉLYEZETT: Minimum 3 competitor verification
+❌ BLOKKOLVA: Ha nincs real business validation + search volume data
+✅ ENGEDÉLYEZETT: Minimum 3 competitor verification + DataForSEO metrics
 ```
 
 #### **Gate 3: Implementation Feasibility**
 ```
-❌ BLOKKOLVA: Ha nincs feasibility assessment
-✅ ENGEDÉLYEZETT: Business capability confirmed
+❌ BLOKKOLVA: Ha nincs feasibility assessment + market demand proof
+✅ ENGEDÉLYEZETT: Business capability confirmed + DataForSEO opportunity score
+```
+
+### **🔍 DataForSEO API Kutatási Módszertan**
+
+**KRITIKUS ESZKÖZ:** DataForSEO MCP integrálva a pontos piaci adatok beszerzéséhez:
+
+#### **🔧 DataForSEO MCP Telepítési Útmutató:**
+```bash
+# 1. Alapvető MCP telepítés (npm package):
+claude mcp add dataforseo --scope user -- npx -y dataforseo-mcp-server
+
+# 2. API kulcsos kapcsolat létrehozása (HTTP transport):
+claude mcp add --header "Authorization: Basic [BASE64_ENCODED_CREDENTIALS]" --transport http dfs-mcp https://mcp.dataforseo.com/http
+
+# Példa használható API kulccsal:
+claude mcp add --header "Authorization: Basic bm9yYmlAam9zemFraS5odTo1MTljZjNiOTAwZjhmYWUw" --transport http dfs-mcp https://mcp.dataforseo.com/http
+
+# 3. Kapcsolat tesztelése:
+claude mcp list
+```
+
+**API Kulcs Format:** `username:password` → Base64 encoding → Authorization header
+
+#### **🤖 Automatikus MCP Telepítési Workflow:**
+
+**MINDEN UltraThink kutatás kezdetén automatikusan végrehajtandó:**
+
+```bash
+# 1. MCP status ellenőrzés:
+claude mcp list | grep dataforseo
+
+# 2. Ha nincs DataForSEO MCP, automatikus telepítés:
+if [ $? -ne 0 ]; then
+  echo "DataForSEO MCP nem található, telepítés..."
+  claude mcp add --header "Authorization: Basic bm9yYmlAam9zemFraS5odTo1MTljZjNiOTAwZjhmYWUw" --transport http dfs-mcp https://mcp.dataforseo.com/http
+  claude mcp list # Verify installation
+fi
+
+# 3. Kutatás indítása csak sikeres kapcsolat után
+```
+
+**Automated Research Trigger Points:**
+- Phase 2: Google Research Validation → DataForSEO keyword volume check
+- Phase 6: Validation Matrix Creation → DataForSEO competition analysis & CPC scoring
+
+#### **Search Volume Kutatás:**
+```
+□ Szolgáltatás + helység kombinációk (pl. "térkövezés budapest")
+□ Havi keresési volumen pontos számokkal
+□ Szezonális ingadozások feltérképezése
+□ Helyi vs. országos keresési arányok
+□ Kapcsolódó kulcsszavak felfedezése
+□ Long-tail keyword lehetőségek
+```
+
+#### **Konkurencia Elemzés:**
+```
+□ SERP Top 10 competitive analysis
+□ Keyword difficulty scoring
+□ Organic vs. paid competition ratio
+□ Local pack dominance patterns
+□ Content gap identification
+□ Ranking opportunity assessment
+```
+
+#### **Profit Potenciál Értékelés:**
+```
+□ Cost-per-click (CPC) adatok
+□ Commercial intent scoring
+□ Conversion probability estimation
+□ ROI potential calculation
+□ Market saturation indicators
+□ Price sensitivity analysis
 ```
 
 **🎯 EREDMÉNY:** Zero guesswork, 100% research-based szolgáltatás architektúra!
@@ -1972,11 +2031,16 @@ Minden oldal **kötelezően** tartalmazza a megfelelő JSON-LD schema-t a Google
 ### **🚀 Frissített Implementációs Checklist**
 
 ```
+□ ✅ AUTOMATIKUS - DataForSEO MCP Access Check:
+□ claude mcp list | grep dataforseo verification
+□ Ha nincs MCP: Automatikus telepítés végrehajtása
+□ API kapcsolat tesztelése és megerősítése
+□ UltraThink Phase 2,6 DataForSEO integration ready
 □ Brand személyiség adaptálása a szakmára
 □ 5 fázisú folyamat lebontása
 □ Keresztlinkek tervezése (3 típus mind)
 □ Érzelmi hook megfogalmazása
-□ Helyi SEO kulcsszavak integrálása
+□ Helyi SEO kulcsszavak integrálása (DataForSEO keyword research)
 □ Kapcsolódó szolgáltatások feltérképezése
 □ JSON-LD Schema implementálás
 □ Project Showcase Slider implementálás
@@ -1998,10 +2062,16 @@ Minden oldal **kötelezően** tartalmazza a megfelelő JSON-LD schema-t a Google
 □ Goal és conversion setup (micro/macro conversions)
 □ Privacy compliance (GDPR, cookie consent)
 □ Attribution modeling beállítása
+□ ✅ AUTOMATIKUS DATAFORSEO INTEGRÁCIÓ:
+□ Minden UltraThink kutatásnál MCP status check
+□ Hiányzó MCP esetén automatikus telepítés
+□ Phase 2,6 DataForSEO API calls végrehajtása
+□ Search volume, competition, CPC adatok validálása
 □ FAQ válaszok 300 karakter limit betartása
 □ Google Rich Results tesztelés FAQ-nál
 □ FAQ kérdések kulcsszó optimalizálása
 □ FAQ mobil megjelenítés optimalizálása
+```
 ```
 
 ---
