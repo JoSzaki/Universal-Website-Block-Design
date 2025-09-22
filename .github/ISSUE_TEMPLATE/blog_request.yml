@@ -1,0 +1,160 @@
+name: 📝 Blog Post Request
+description: Kérés új blogcikk automatikus generálására AI-val
+title: "[BLOG] "
+labels: ["blog:generate", "content", "ai-generated"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 🤖 Automatikus Blog Generálás
+        Ez az Issue template automatikus blog content generálásra szolgál. A GitHub Actions ütemezetten feldolgozza ezeket a kéréseket.
+
+  - type: dropdown
+    id: type
+    attributes:
+      label: Content Type
+      description: Válaszd ki a content típusát
+      options:
+        - Local Angle
+        - Topical Authority
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: Konkrét kategória
+      options:
+        - Best-Fit Brief
+        - Top Reasons Series
+        - Service/City Post
+        - Service Comparison
+        - Mistakes
+        - Step-by-Step Guide
+        - Case Study
+        - Beginner's Guide
+        - FAQ Format
+        - Dos and Don'ts
+        - Solutions
+        - Industry Stats
+        - Trends
+        - Myths
+        - Quick Tips
+        - Pros and Cons
+        - What People Get Wrong
+        - Ultimate List
+        - Behind the Scenes
+        - Expert Opinion
+        - Before vs After
+        - Lessons Learned
+        - Personal Story
+        - If I Had to Start From Scratch
+    validations:
+      required: true
+
+  - type: input
+    id: title
+    attributes:
+      label: Blog Post Title
+      description: A generálandó cikk címe
+      placeholder: "pl. Ki a legjobb térkövező Budapest I. kerületében?"
+    validations:
+      required: true
+
+  - type: input
+    id: slug
+    attributes:
+      label: URL Slug
+      description: A cikk URL-jének vége (blog/SLUG)
+      placeholder: "pl. legjobb-terkovezö-i-kerulet"
+    validations:
+      required: true
+
+  - type: input
+    id: service
+    attributes:
+      label: Service Focus
+      description: Melyik szolgáltatásra fókuszáljon
+      placeholder: "pl. térkövezés, kőműves, támfal építés"
+
+  - type: input
+    id: location
+    attributes:
+      label: Location Focus
+      description: Melyik helyszínre fókuszáljon
+      placeholder: "pl. I. kerület, Budakeszi, Pest megye"
+
+  - type: input
+    id: keywords
+    attributes:
+      label: Target Keywords
+      description: Fő SEO kulcsszavak (vessző elválasztva)
+      placeholder: "térkövezés budapest, legjobb térkövező, prostone"
+
+  - type: dropdown
+    id: length
+    attributes:
+      label: Target Length
+      description: Cél hosszúság
+      options:
+        - Short (600-800 words)
+        - Medium (800-1200 words)
+        - Long (1200-2000 words)
+        - Ultimate Guide (2000+ words)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: Generálási prioritás
+      options:
+        - High
+        - Medium
+        - Low
+      default: 1
+
+  - type: textarea
+    id: additional_notes
+    attributes:
+      label: Additional Notes
+      description: Egyéb megjegyzések a generáláshoz
+      placeholder: "Speciális követelmények, hangsúlyozandó pontok..."
+
+  - type: checkboxes
+    id: requirements
+    attributes:
+      label: SEO Requirements
+      description: Ellenőrizd a szükséges SEO elemeket
+      options:
+        - label: Meta Title optimalizálás (60 karakter)
+          required: true
+        - label: Meta Description (160 karakter)
+          required: true
+        - label: H1-H6 struktúra
+          required: true
+        - label: JSON-LD Schema markup
+          required: true
+        - label: Belső linkek (5-8 db)
+          required: true
+        - label: CTA elhelyezés
+          required: true
+        - label: Brand voice konzisztencia
+          required: true
+        - label: Lokális szakértelem demonstrálása
+          required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        
+        **📋 Következő lépések:**
+        1. Issue mentése után a GitHub Actions heti ütemezés alapján feldolgozza
+        2. AI generált content → PR nyitás
+        3. Manuális review és jóváhagyás szükséges
+        4. Merge után automatikus deploy: `blog/{slug}`
+        
+        **🔗 Generated URL:** `https://domain.hu/blog/{slug}`
