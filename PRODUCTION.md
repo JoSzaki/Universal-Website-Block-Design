@@ -277,6 +277,60 @@ ALAPERŐSSÉGEK (minden oldalon megjelennek):
 
 ---
 
+## 📈 **SEO Optimalizált Hero Szekció - Kötelező Szabályok**
+
+### **🎯 H1 Cím Optimalizálási Formula:**
+
+```
+SABLON: [FŐ_KULCSSZÓ] [HELYSÉG] - [SZEMÉLYES_NÉV] mester [TAPASZTALAT]+ év tapasztalat
+
+PÉLDÁK:
+✅ "Térkövezés Budapest - Kovács János mester 15+ év tapasztalat"
+✅ "Villanyszerelés Pest megye - Nagy Péter villanyszerelő 20+ év tapasztalat"
+✅ "Kertépítés Budakeszi - Tóth László kertészmérnök 12+ év tapasztalat"
+
+KÖVETELMÉNYEK:
+- Pontosan 1x fő kulcsszó előfordulás
+- Helység/terület egyértelmű megjelölése
+- Személyes név és szakmai cím
+- Konkrét tapasztalati idő
+- Max 60 karakter (Google SERP optimális)
+```
+
+### **🎯 Subtitle Optimalizálási Formula:**
+
+```
+SABLON: Professzionális [SZOLGÁLTATÁS] [HELYSÉG]en és [KÖRNYÉK]. [ÉRTÉKAJÁNLAT] - [STATISZTIKA], [GARANCIA_INFO], [INGYENES_SZOLGÁLTATÁS] és [SPECIALITÁS].
+
+PÉLDÁK:
+✅ "Professzionális térkövezés Budapesten és Pest megyében. Prémium térkő burkolatok családi házakhoz - 200+ sikeres projekt, ingyenes felmérés, 5 év garancia és vízelvezetési specialitás."
+
+✅ "Professzionális villanyszerelés Budapesten és környékén. Biztonságos elektromos rendszerek otthonokhoz - 300+ projekt, 24/7 sürgősségi szolgáltatás, 10 év garancia és okos otthon specialitás."
+
+KÖVETELMÉNYEK:
+- 2-3x kapcsolódó kulcsszó természetes használata
+- Szolgáltatási terület pontos meghatározása
+- Konkrét számok/statisztikák
+- Egyedi értékajánlat kiemelése
+- Max 160 karakter (meta description hossz)
+- Érzelmi és ésszerű elemek kombinációja
+```
+
+### **📊 SEO Ellenőrzési Checklist:**
+
+```
+□ H1 tartalmazza a fő kulcsszót pontosan 1x
+□ Subtitle tartalmazza 2-3 kapcsolódó kulcsszót
+□ Teljes hero szekció < 220 karakter összesen
+□ Helyi SEO kulcsszavak természetes integrációja
+□ Érzelmi és racionális elemek egyensúlya
+□ Brand személyiség konzisztencia
+□ Mobile-friendly megjelenítés
+□ Gyors betöltési idő (<3 másodperc)
+```
+
+---
+
 ## 🎭 **Univerzális Brand Személyiség Template**
 
 ### **📝 Brand Személyiség Komponensek**
