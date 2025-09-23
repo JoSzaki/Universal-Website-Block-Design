@@ -19,7 +19,11 @@
       "mcp__playwright__browser_snapshot",
       "mcp__playwright__browser_close",
       "Bash(python:*)",
-      "Bash(npm search:*)"
+      "Bash(npm search:*)",
+      "Bash(mkdir:*)",
+      "Bash(npm run dev:*)",
+      "Bash(npm run:*)",
+      "Bash(git add:*)"
     ],
     "deny": [],
     "ask": []
